@@ -156,7 +156,7 @@ class EmailHandler extends ExceptionHandler
                     )->get(
                         $this->globalThrottleCacheKey,
                         0
-                    ) > config('laravelEmailExceptions.ErrorEmail.globalThrottleLimit')
+                    ) >= config('laravelEmailExceptions.ErrorEmail.globalThrottleLimit')
                 ) {
                     return true;
                 } else {
