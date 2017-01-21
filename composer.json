@@ -1,0 +1,33 @@
+{
+    "name": "abrigham/laravel-email-exceptions",
+    "description": "Email Exceptions from your laravel application",
+    "license": "MIT",
+    "keywords": ["email", "exception", "laravel"],
+    "authors": [
+        {
+            "name": "Aaron Brigham",
+            "email": "abrigham1@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "~5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "5.*",
+        "squizlabs/php_codesniffer": "2.*",
+        "orchestra/testbench": "~3.0",
+        "mockery/mockery": "^0.9.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Abrigham\\LaravelEmailExceptions\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Abrigham\\LaravelEmailExceptions\\Tests\\": "tests/"
+        }
+    }
+}
