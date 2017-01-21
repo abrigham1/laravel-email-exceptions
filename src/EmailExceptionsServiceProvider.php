@@ -23,10 +23,10 @@ class EmailExceptionsServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/views', 'laravelEmailExceptions');
 
         $this->publishes([
-            __DIR__.'/config/laravelEmailExceptions.php' => config_path('laravelEmailExceptions.php')
+            __DIR__.'/config/laravelEmailExceptions.php' => config_path('laravelEmailExceptions.php'),
         ], 'config');
         $this->publishes([
-            __DIR__.'/views' => resource_path('views/vendor/laravelEmailExceptions')
+            __DIR__.'/views' => resource_path('views/vendor/laravelEmailExceptions'),
         ], 'views');
     }
 
@@ -38,8 +38,8 @@ class EmailExceptionsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/config/laravelEmailExceptions.php', 'laravelEmailExceptions'
+            __DIR__.'/config/laravelEmailExceptions.php',
+            'laravelEmailExceptions'
         );
-
     }
 }

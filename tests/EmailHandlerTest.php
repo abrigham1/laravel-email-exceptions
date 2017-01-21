@@ -49,7 +49,6 @@ class EmailHandlerTest extends TestCase
             ->andReturn($shouldMail);
 
         if ($shouldMail) {
-
             // we expect email handler to receive mailException and return null
             $this->emailHandlerMock
                 ->shouldReceive('mailException')
@@ -57,7 +56,6 @@ class EmailHandlerTest extends TestCase
                 ->once()
                 ->andReturn(null);
         } else {
-
             // we expect the mail handler to not receive mailException
             $this->emailHandlerMock
                 ->shouldNotReceive('mailException');
@@ -127,7 +125,6 @@ class EmailHandlerTest extends TestCase
         ]);
 
         if ($email == true && $toEmailAddress && $fromEmailAddress) {
-
             // if email is true and we have a to and from address we should
             // receive a call to isInDontEmailLIst
             $this->emailHandlerMock
@@ -136,7 +133,6 @@ class EmailHandlerTest extends TestCase
                 ->once()
                 ->andReturn($isInDontEmailListReturn);
             if ($isInDontEmailListReturn == false) {
-
                 // should receive a call to appSpecificDontEmail
                 $this->emailHandlerMock
                     ->shouldReceive('appSpecificDontEmail')
@@ -144,7 +140,6 @@ class EmailHandlerTest extends TestCase
                     ->with($exception)
                     ->andReturn($appSpecificDontEmailReturn);
                 if ($appSpecificDontEmailReturn == false) {
-
                     // should receive a call to throttle
                     $this->emailHandlerMock
                         ->shouldReceive('throttle')
@@ -152,7 +147,6 @@ class EmailHandlerTest extends TestCase
                         ->once()
                         ->andReturn($throttleReturn);
                     if ($throttleReturn == false) {
-
                         // if throttle return is also false we should receive a
                         // call to globalThrottle
                         $this->emailHandlerMock
@@ -161,14 +155,12 @@ class EmailHandlerTest extends TestCase
                             ->once()
                             ->andReturn($globalThrottleReturn);
                     } else {
-
                         // if app specific email return is true we shouldn't receive a call
                         // to global throttle
                         $this->emailHandlerMock
                             ->shouldNotReceive('globalThrottle');
                     }
                 } else {
-
                     // if throttle is true we wont get calls to appSpecificDontEmail or globalThrottle
                     $this->emailHandlerMock
                         ->shouldNotReceive('throttle');
@@ -176,7 +168,6 @@ class EmailHandlerTest extends TestCase
                         ->shouldNotReceive('globalThrottle');
                 }
             } else {
-
                 // if isInDontEmailList is true we won't receive throttle appSpecificDontEmail or globalThrottle
                 $this->emailHandlerMock
                     ->shouldNotReceive('appSpecificDontEmail');
@@ -190,7 +181,6 @@ class EmailHandlerTest extends TestCase
         // check if actual = our expected value
         $actual = $this->emailHandlerMock->shouldMail($exception);
         $this->assertEquals($expected, $actual);
-
     }
 
     /**
@@ -343,7 +333,6 @@ class EmailHandlerTest extends TestCase
         ]);
 
         if ($globalThrottle == false) {
-
             // if global throttling is turned off we should
             // not receive any calls to the cache
             Cache::shouldReceive('store')
@@ -357,7 +346,6 @@ class EmailHandlerTest extends TestCase
             Cache::shouldReceive('increment')
                 ->never();
         } else {
-
             // if global throttling is on we'll at least get a cache has call
             Cache::shouldReceive('has')
                 ->once()
@@ -365,14 +353,12 @@ class EmailHandlerTest extends TestCase
                 ->andReturn($globalThrottleCacheHasReturn);
 
             if ($globalThrottleCacheHasReturn == true) {
-
                 // if the item is in the cache we'll get a cache get call
                 Cache::shouldReceive('get')
                     ->once()
                     ->with($globalThrottleCacheKey, 0)
                     ->andReturn($globalThrottleCacheGetReturn);
                 if ($globalThrottleCacheGetReturn > $globalThrottleLimit) {
-
                     // if we're over our limit we'll receive store twice and increment never
                     Cache::shouldReceive('store')
                         ->twice()
@@ -381,7 +367,6 @@ class EmailHandlerTest extends TestCase
                     Cache::shouldReceive('increment')
                         ->never();
                 } else {
-
                     // if we're not over our limit we'll receive store 3 times and increment once
                     Cache::shouldReceive('store')
                         ->times(3)
@@ -392,7 +377,6 @@ class EmailHandlerTest extends TestCase
                         ->with($globalThrottleCacheKey);
                 }
             } else {
-
                 // if the item is not in the cache we'll receive store twice
                 // and one call to put to get it in the cache
                 // we will not receive an increment call
@@ -495,12 +479,10 @@ class EmailHandlerTest extends TestCase
 
 
         if ($throttle == false) {
-
             // if throttling is turned off we will not receive a call to check the dont throttle list
             $this->emailHandlerMock
                 ->shouldNotReceive('isInDontThrottleList');
         } else {
-
             // else we will receive a call to check if its in the dont throttle list
             $this->emailHandlerMock
                 ->shouldReceive('isInDontThrottleList')
@@ -510,7 +492,6 @@ class EmailHandlerTest extends TestCase
         }
 
         if ($throttle == false || $isInDontThrottleListReturn) {
-
             // if throttling is off or its in the dont throttle list
             // we wont be calling any of the other functions
             Cache::shouldReceive('store')
@@ -522,7 +503,6 @@ class EmailHandlerTest extends TestCase
             $this->emailHandlerMock
                 ->shouldNotReceive('getThrottleCacheKey');
         } else {
-
             // we made it past the dont throttle list and throttling is on
             // we'll at least recieve a call to check it's in the cache
             Cache::shouldReceive('has')
@@ -530,7 +510,6 @@ class EmailHandlerTest extends TestCase
                 ->with($throttleCacheKey)
                 ->andReturn($throttleCacheHasReturn);
             if ($throttleCacheHasReturn == true) {
-
                 // if it is in the cache we'll receive a call to get the cache key once
                 $this->emailHandlerMock
                     ->shouldReceive('getThrottleCacheKey')
@@ -548,7 +527,6 @@ class EmailHandlerTest extends TestCase
                 Cache::shouldReceive('put')
                     ->never();
             } else {
-
                 // if its not in the cache we'll receive two calls to store (once for has once for put)
                 Cache::shouldReceive('store')
                     ->twice()

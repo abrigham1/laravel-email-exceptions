@@ -23,7 +23,7 @@ before_script:
 
 script:
   - if [[ $PHPCS != '1' && $COVERAGE != '1' ]]; then vendor/bin/phpunit; fi
-  - if [[ $PHPCS = 1 ]]; then vendor/bin/phpcs -p --standard=psr2 src/; fi
+  - if [[ $PHPCS = 1 ]]; then vendor/bin/phpcs --standard=psr2 --ignore=*vendor*,*src/views* ./; fi
   - if [[ $COVERAGE = 1 ]]; then vendor/bin/phpunit --coverage-clover=clover.xml; fi
 
 
