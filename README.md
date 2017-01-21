@@ -110,6 +110,7 @@ Update your config values in **config/laravelEmailExceptions.php**
     'fromEmailAddress' => 'noreply@yoursite.com',
 ]
 ```
+
 #### Throttling
 Both throttling and global throttling are put in place in an attempt to prevent spam to the dev team. Throttling works
 by creating a unique cache key made from exception class + exception message + exception code. Its aim is to prevent duplicate
