@@ -114,11 +114,13 @@ class EmailHandler extends ExceptionHandler
         ];
 
         Mail::send('laravelEmailExceptions::emailException', $data, function ($message) {
+
+            $default = 'An Exception has been thrown on '.env('APP_URL', 'unknown').' ('.env('APP_ENV', 'unknown').')';
+            $subject = config('laravelEmailExceptions.ErrorEmail.emailSubject') ?: $default;
+
             $message->from(config('laravelEmailExceptions.ErrorEmail.fromEmailAddress'))
                 ->to(config('laravelEmailExceptions.ErrorEmail.toEmailAddress'))
-                ->subject(
-                    'An Exception has been thrown on '.env('APP_URL', 'unknown').' ('.env('APP_ENV', 'unknown').')'
-                );
+                ->subject($subject);
         });
     }
 
