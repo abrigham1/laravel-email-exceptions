@@ -68,11 +68,12 @@ Default configuration:
     'throttleCacheDriver' => env('CACHE_DRIVER', 'file'),
     'throttleDurationMinutes' => 5,
     'dontThrottle' => [],
-    'globalThrottle' => false,
+    'globalThrottle' => true,
     'globalThrottleLimit' => 20,
     'globalThrottleDurationMinutes' => 30,
-    'toEmailAddress' => 'abrigham1@gmail.com',
-    'fromEmailAddress' => 'noreply@abrigham.com',
+    'toEmailAddress' => null,
+    'fromEmailAddress' => null,
+    'emailSubject' => null
 ]
 ```
 
@@ -82,11 +83,12 @@ Default configuration:
 * throttleCacheDriver (string) - The cache driver to use for throttling, by default it uses CACHE_DRIVER from your env file
 * throttleDurationMinutes (int) - The duration in minutes of the throttle for example if you put 5 and a BadMethodCallException triggers an email if that same exception is thrown again it will not be emailed until 5 minutes have passed
 * dontThrottle (array) - This is the same as dontEmail except provide a list of exceptions you do not wish to throttle ever even if throttling is turned on
-* globalThrottle (bool) - Enable or disable throttling of exception emails. Throttling is only performed if its been determined the exact same exception/error has already been emailed by checking the cache. Errors/Exceptions are determined to be unique by exception/error class + exception/error message + exception/error code
+* globalThrottle (bool) - Enable or disable whether you want to globally throttle the number of emails you can receive of all exception types by this application
 * globalThrottleLimit (int) - The the maximum number of emails you want to receive in a given period.
 * throttleDurationMinutes (int) - The duration in minutes of the global throttle for example if you put in 30 and have 10 for your globalThrottleLimit when the first email is sent out a 30 minute timer will commence once you reach the 10 email threshold no more emails will go out for that 30 minute period. 
 * toEmailAddress (string) - The email to send the exceptions emails to such as the dev team dev@yoursite.com
 * fromEmailAddress (string) - The email address these emails should be sent from such as noreply@yoursite.com.
+* emailSubject (string) - The subject of email, leave NULL to use default Default Subject: An Exception has been thrown on APP_URL APP_ENV
 
 **Note:** the dontReport variable from **app/Exceptions/Handler.php** file will also not be emailed as it's assumed if they are not important enough to log then they also are not important enough to email
 
@@ -103,11 +105,12 @@ Update your config values in **config/laravelEmailExceptions.php**
     'throttleCacheDriver' => env('CACHE_DRIVER', 'file'),
     'throttleDurationMinutes' => 5,
     'dontThrottle' => [],
-    'globalThrottle' => false,
+    'globalThrottle' => true,
     'globalThrottleLimit' => 20,
     'globalThrottleDurationMinutes' => 30,
     'toEmailAddress' => 'dev@yoursite.com',
     'fromEmailAddress' => 'noreply@yoursite.com',
+    'emailSubject' => null,
 ]
 ```
 
@@ -117,7 +120,7 @@ by creating a unique cache key made from exception class + exception message + e
 exceptions from being reported via email giving the team time to fix them before they are reported again.
 
 #### Global Throttling
-Global throttling is a similar idea except its put in place to prevent more then a certain number of emails going out 
+Global throttling is a similar idea except it's put in place to prevent more then a certain number of emails going out 
 within a given time period. This should typically only be necessary for an app wide failure ex major portions of the
 site are down so many varied types of exceptions are coming in from all directions.
 
