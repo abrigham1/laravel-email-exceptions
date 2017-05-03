@@ -37,7 +37,7 @@ return [
      * - fromEmailAddress (string) - The email address these emails should be sent from
      *
      * - emailSubject (string) - The subject of email, leave NULL to use default
-     * 	 Default Subject: An Exception has been thrown on APP_URL APP_ENV
+     *   Default Subject: An Exception has been thrown on APP_URL APP_ENV
      *
      */
     'ErrorEmail' => [
