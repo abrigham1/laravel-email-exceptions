@@ -35,9 +35,9 @@ return [
      *   typically the dev team for the website
      *
      * - fromEmailAddress (string) - The email address these emails should be sent from
-	 *
-	 * - emailSubject (string) - The subject of email, leave NULL to use default
-	 * 	 Default Subject: An Exception has been thrown on APP_URL APP_ENV
+     *
+     * - emailSubject (string) - The subject of email, leave NULL to use default
+     * 	 Default Subject: An Exception has been thrown on APP_URL APP_ENV
      *
      */
     'ErrorEmail' => [
@@ -52,6 +52,6 @@ return [
         'globalThrottleDurationMinutes' => 30,
         'toEmailAddress' => null,
         'fromEmailAddress' => null,
-		'emailSubject' => null
+        'emailSubject' => null
     ]
 ];
