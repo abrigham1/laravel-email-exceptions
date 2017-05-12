@@ -150,7 +150,7 @@ class Handler extends ExceptionHandler
 ## Gotchas
 If you're having trouble getting this working first make sure you have configured your
 application to send mail correctly. One of the easiest ways to get mail up and running 
-is by signing up for a free account on mailtrap.io. Once you've done that you'll have 
+is by signing up for a free account on [mailtrap.io](https://mailtrap.io). Once you've done that you'll have 
 to update your .env file with values like these replacing the username and password 
 with those listed in your demo inbox
 ```
