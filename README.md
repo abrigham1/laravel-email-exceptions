@@ -34,7 +34,7 @@ You can install this plugin into your laravel 5.x application using [composer](h
 
 Run the following command
 ```bash
-composer require abrigham/laravel-email-exceptions "^1.0.0"
+composer require abrigham/laravel-email-exceptions
  ```
 After updating composer, add the service provider to the providers array in config/app.php
 
