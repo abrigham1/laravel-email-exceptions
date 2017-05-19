@@ -97,7 +97,7 @@ class EmailHandlerTest extends TestCase
      * @param $email
      * @param $toEmailAddress
      * @param $fromEmailAddress
-     * @param $isInDontReportListReturn
+     * @param $shouldntReportReturn
      * @param $isInDontEmailListReturn
      * @param $throttleReturn
      * @param $appSpecificDontEmailReturn
@@ -108,7 +108,7 @@ class EmailHandlerTest extends TestCase
         $email,
         $toEmailAddress,
         $fromEmailAddress,
-        $isInDontReportListReturn,
+        $shouldntReportReturn,
         $isInDontEmailListReturn,
         $throttleReturn,
         $appSpecificDontEmailReturn,
@@ -128,15 +128,15 @@ class EmailHandlerTest extends TestCase
 
         if ($email == true && $toEmailAddress && $fromEmailAddress) {
             // if email is tru and we have a to and from address we should
-            // receive a call to isInDontReportList
+            // receive a call to shouldntReport
             // if email is true and we have a to and from address we should
             // receive a call to isInDontEmailList
             $this->emailHandlerMock
-                ->shouldReceive('isInDontReportList')
+                ->shouldReceive('shouldntReport')
                 ->with($exception)
                 ->once()
-                ->andReturn($isInDontReportListReturn);
-            if ($isInDontReportListReturn == false) {
+                ->andReturn($shouldntReportReturn);
+            if ($shouldntReportReturn == false) {
                 $this->emailHandlerMock
                     ->shouldReceive('isInDontEmailList')
                     ->with($exception)
@@ -187,7 +187,7 @@ class EmailHandlerTest extends TestCase
                         ->shouldNotReceive('globalThrottle');
                 }
             } else {
-                // if isInDontReportList is true we won't receive isInDontEmail, throttle, appSpecificDontEmail or
+                // if shouldntReport is true we won't receive isInDontEmail, throttle, appSpecificDontEmail or
                 // global throttle
                 $this->emailHandlerMock
                     ->shouldNotReceive('isInDontEmailList');
@@ -220,7 +220,7 @@ class EmailHandlerTest extends TestCase
                 false,
                 // fromEmailAddress
                 false,
-                // isInDontReportListReturn
+                // shouldntReportReturn
                 false,
                 // isInDontEmailListReturn
                 false,
@@ -240,7 +240,7 @@ class EmailHandlerTest extends TestCase
                 false,
                 // fromEmailAddress
                 false,
-                // isInDontReportListReturn
+                // shouldntReportReturn
                 false,
                 // isInDontEmailListReturn
                 false,
@@ -260,7 +260,7 @@ class EmailHandlerTest extends TestCase
                 "dev@example.com",
                 // fromEmailAddress
                 false,
-                // isInDontReportListReturn
+                // shouldntReportReturn
                 false,
                 // isInDontEmailListReturn
                 false,
@@ -280,7 +280,7 @@ class EmailHandlerTest extends TestCase
                 "dev@example.com",
                 // fromEmailAddress
                 "dev2@example.com",
-                // isInDontReportListReturn
+                // shouldntReportReturn
                 false,
                 // isInDontEmailListReturn
                 false,
@@ -300,7 +300,7 @@ class EmailHandlerTest extends TestCase
                 "dev@example.com",
                 // fromEmailAddress
                 "dev2@example.com",
-                // isInDontReportListReturn
+                // shouldntReportReturn
                 true,
                 // isInDontEmailListReturn
                 false,
@@ -320,7 +320,7 @@ class EmailHandlerTest extends TestCase
                 "dev@example.com",
                 // fromEmailAddress
                 "dev2@example.com",
-                // isInDontReportListReturn
+                // shouldntReportReturn
                 false,
                 // isInDontEmailListReturn
                 true,
@@ -340,7 +340,7 @@ class EmailHandlerTest extends TestCase
                 "dev@example.com",
                 // fromEmailAddress
                 "dev2@example.com",
-                // isInDontReportListReturn
+                // shouldntReportReturn
                 false,
                 // isInDontEmailListReturn
                 false,
@@ -360,7 +360,7 @@ class EmailHandlerTest extends TestCase
                 "dev@example.com",
                 // fromEmailAddress
                 "dev2@example.com",
-                // isInDontReportListReturn
+                // shouldntReportReturn
                 false,
                 // isInDontEmailListReturn
                 false,
@@ -380,7 +380,7 @@ class EmailHandlerTest extends TestCase
                 "dev@example.com",
                 // fromEmailAddress
                 "dev2@example.com",
-                // isInDontReportListReturn
+                // shouldntReportReturn
                 false,
                 // isInDontEmailListReturn
                 false,
