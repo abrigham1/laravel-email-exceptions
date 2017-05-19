@@ -67,6 +67,8 @@ class EmailHandler extends ExceptionHandler
             // if we dont have an email address to mail from
             !config('laravelEmailExceptions.ErrorEmail.fromEmailAddress') ||
 
+            $this->isInDontReportList($exception) ||
+
             // if the exception is in the don't mail list
             $this->isInDontEmailList($exception) ||
 
@@ -284,5 +286,16 @@ class EmailHandler extends ExceptionHandler
         $dontEmailList = config('laravelEmailExceptions.ErrorEmail.dontEmail');
 
         return $this->isInList($dontEmailList, $exception);
+    }
+
+    /**
+     * check if the exception is in the dont email list
+     *
+     * @param Exception $exception
+     * @return bool
+     */
+    protected function isInDontReportList(Exception $exception)
+    {
+        return $this->isInList($this->dontReport, $exception);
     }
 }
