@@ -2,7 +2,7 @@
     "name": "abrigham/laravel-email-exceptions",
     "description": "Email Exceptions from your laravel application",
     "license": "MIT",
-    "keywords": ["email", "exception", "laravel"],
+    "keywords": ["email", "exception", "laravel", "laravel-5-package", "exception-handling", "debugging"],
     "authors": [
         {
             "name": "Aaron Brigham",
