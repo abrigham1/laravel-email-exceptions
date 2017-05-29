@@ -1,4 +1,5 @@
 <?php
+
 namespace Abrigham\LaravelEmailExceptions\Exceptions;
 
 use Exception;
@@ -117,7 +118,8 @@ class EmailHandler extends ExceptionHandler
 
         Mail::send('laravelEmailExceptions::emailException', $data, function ($message) {
 
-            $default = 'An Exception has been thrown on '.config('app.name', 'unknown').' ('.config('app.env', 'unknown').')';
+            $default = 'An Exception has been thrown on '.
+                config('app.name', 'unknown').' ('.config('app.env', 'unknown').')';
             $subject = config('laravelEmailExceptions.ErrorEmail.emailSubject') ?: $default;
 
             $message->from(config('laravelEmailExceptions.ErrorEmail.fromEmailAddress'))
@@ -145,11 +147,11 @@ class EmailHandler extends ExceptionHandler
             ) {
                 // if we are over the limit return true since this should be throttled
                 if (Cache::store(
-                    config('laravelEmailExceptions.ErrorEmail.throttleCacheDriver')
-                )->get(
-                    $this->globalThrottleCacheKey,
-                    0
-                ) >= config('laravelEmailExceptions.ErrorEmail.globalThrottleLimit')
+                        config('laravelEmailExceptions.ErrorEmail.throttleCacheDriver')
+                    )->get(
+                        $this->globalThrottleCacheKey,
+                        0
+                    ) >= config('laravelEmailExceptions.ErrorEmail.globalThrottleLimit')
                 ) {
                     return true;
                 } else {
