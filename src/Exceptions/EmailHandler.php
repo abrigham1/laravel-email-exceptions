@@ -147,11 +147,11 @@ class EmailHandler extends ExceptionHandler
             ) {
                 // if we are over the limit return true since this should be throttled
                 if (Cache::store(
-                        config('laravelEmailExceptions.ErrorEmail.throttleCacheDriver')
-                    )->get(
-                        $this->globalThrottleCacheKey,
-                        0
-                    ) >= config('laravelEmailExceptions.ErrorEmail.globalThrottleLimit')
+                    config('laravelEmailExceptions.ErrorEmail.throttleCacheDriver')
+                )->get(
+                    $this->globalThrottleCacheKey,
+                    0
+                ) >= config('laravelEmailExceptions.ErrorEmail.globalThrottleLimit')
                 ) {
                     return true;
                 } else {
