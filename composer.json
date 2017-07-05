@@ -29,5 +29,12 @@
         "psr-4": {
             "Abrigham\\LaravelEmailExceptions\\Tests\\": "tests/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Abrigham\\LaravelEmailExceptions\\EmailExceptionsServiceProvider"
+            ]
+        }
     }
 }

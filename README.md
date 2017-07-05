@@ -37,6 +37,7 @@ Run the following command
 composer require abrigham/laravel-email-exceptions
  ```
 After updating composer, add the service provider to the providers array in config/app.php
+> If you are in laravel >= 5.5 you can skip adding the provider to config/app.php as it will be auto-discovered
 
 ```php
 Abrigham\LaravelEmailExceptions\EmailExceptionsServiceProvider::class,
