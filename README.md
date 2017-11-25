@@ -88,7 +88,7 @@ Default configuration:
 * globalThrottle (bool) - Enable or disable whether you want to globally throttle the number of emails you can receive of all exception types by this application
 * globalThrottleLimit (int) - The the maximum number of emails you want to receive in a given period.
 * throttleDurationMinutes (int) - The duration in minutes of the global throttle for example if you put in 30 and have 10 for your globalThrottleLimit when the first email is sent out a 30 minute timer will commence once you reach the 10 email threshold no more emails will go out for that 30 minute period. 
-* toEmailAddress (string) - The email to send the exceptions emails to such as the dev team dev@yoursite.com
+* toEmailAddress (string|array) - The email(s) to send the exceptions emails to such as the dev team dev@yoursite.com
 * fromEmailAddress (string) - The email address these emails should be sent from such as noreply@yoursite.com.
 * emailSubject (string) - The subject of email, leave NULL to use default Default Subject: An Exception has been thrown on APP_URL APP_ENV
 

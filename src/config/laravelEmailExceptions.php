@@ -31,7 +31,7 @@ return [
      *   ex if you want to receive a maximum of 20 emails in a given 30 minute time period
      *   enter 20 for the globalThrottleLimit and 30 for globalThrottleDurationMinutes
      *
-     * - toEmailAddress (string) - The email address to send these error emails to,
+     * - toEmailAddress (string|array) - The email address(es) to send these error emails to,
      *   typically the dev team for the website
      *
      * - fromEmailAddress (string) - The email address these emails should be sent from
