@@ -20,14 +20,13 @@ class EmailHandler extends ExceptionHandler
      */
     protected $throttleCacheKey = null;
 
-
     /**
      * Report or log an exception.
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception $exception
-     * @return void
+     * @param Exception $exception
+     * @throws Exception
      */
     public function report(Exception $exception)
     {
@@ -45,6 +44,7 @@ class EmailHandler extends ExceptionHandler
      * wrapping the parent call to isolate for testing
      *
      * @param Exception $exception
+     * @throws Exception
      */
     protected function callParentReport(Exception $exception)
     {
@@ -56,6 +56,7 @@ class EmailHandler extends ExceptionHandler
      *
      * @param Exception $exception
      * @return bool
+     * @throws Exception
      */
     protected function shouldMail(Exception $exception)
     {
@@ -132,6 +133,7 @@ class EmailHandler extends ExceptionHandler
      * check if we need to globally throttle the exception
      *
      * @return bool
+     * @throws Exception
      */
     protected function globalThrottle()
     {
@@ -147,11 +149,11 @@ class EmailHandler extends ExceptionHandler
             ) {
                 // if we are over the limit return true since this should be throttled
                 if (Cache::store(
-                    config('laravelEmailExceptions.ErrorEmail.throttleCacheDriver')
-                )->get(
-                    $this->globalThrottleCacheKey,
-                    0
-                ) >= config('laravelEmailExceptions.ErrorEmail.globalThrottleLimit')
+                        config('laravelEmailExceptions.ErrorEmail.throttleCacheDriver')
+                    )->get(
+                        $this->globalThrottleCacheKey,
+                        0
+                    ) >= config('laravelEmailExceptions.ErrorEmail.globalThrottleLimit')
                 ) {
                     return true;
                 } else {
@@ -169,7 +171,9 @@ class EmailHandler extends ExceptionHandler
                 )->put(
                     $this->globalThrottleCacheKey,
                     1,
-                    $this->getDateTimeMinutesFromNow(config('laravelEmailExceptions.ErrorEmail.globalThrottleDurationMinutes'))
+                    $this->getDateTimeMinutesFromNow(
+                        config('laravelEmailExceptions.ErrorEmail.globalThrottleDurationMinutes')
+                    )
                 );
 
                 // if we're just making the cache key now we are not global throttling yet
@@ -182,7 +186,8 @@ class EmailHandler extends ExceptionHandler
      * check if we need to throttle the exception and do the throttling if required
      *
      * @param Exception $exception
-     * @return bool return true if we should throttle or false if we should not
+     * @return bool
+     * @throws Exception
      */
     protected function throttle(Exception $exception)
     {
@@ -207,7 +212,9 @@ class EmailHandler extends ExceptionHandler
                 )->put(
                     $this->getThrottleCacheKey($exception),
                     true,
-                    $this->getDateTimeMinutesFromNow(config('laravelEmailExceptions.ErrorEmail.throttleDurationMinutes'))
+                    $this->getDateTimeMinutesFromNow(
+                        config('laravelEmailExceptions.ErrorEmail.throttleDurationMinutes')
+                    )
                 );
 
                 // report that we do not need to throttle as its not been reported within the last throttle period
@@ -300,6 +307,7 @@ class EmailHandler extends ExceptionHandler
     protected function getDateTimeMinutesFromNow($minutesToAdd = 0)
     {
         $now = new \DateTime();
+
         return $now->modify("+{$minutesToAdd} minutes");
     }
 }
