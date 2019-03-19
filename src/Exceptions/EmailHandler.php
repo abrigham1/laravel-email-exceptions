@@ -169,7 +169,7 @@ class EmailHandler extends ExceptionHandler
                 )->put(
                     $this->globalThrottleCacheKey,
                     1,
-                    now()->addMinutes(config('laravelEmailExceptions.ErrorEmail.globalThrottleDurationMinutes'))
+                    $this->getDateTimeMinutesFromNow(config('laravelEmailExceptions.ErrorEmail.globalThrottleDurationMinutes'))
                 );
 
                 // if we're just making the cache key now we are not global throttling yet
@@ -207,7 +207,7 @@ class EmailHandler extends ExceptionHandler
                 )->put(
                     $this->getThrottleCacheKey($exception),
                     true,
-                    now()->addMinutes(config('laravelEmailExceptions.ErrorEmail.throttleDurationMinutes'))
+                    $this->getDateTimeMinutesFromNow(config('laravelEmailExceptions.ErrorEmail.throttleDurationMinutes'))
                 );
 
                 // report that we do not need to throttle as its not been reported within the last throttle period
@@ -288,5 +288,17 @@ class EmailHandler extends ExceptionHandler
         $dontEmailList = config('laravelEmailExceptions.ErrorEmail.dontEmail');
 
         return $this->isInList($dontEmailList, $exception);
+    }
+
+    /**
+     * get a datetime with the minutes added
+     *
+     * @param int $minutesToAdd
+     * @return mixed
+     */
+    protected function getDateTimeMinutesFromNow($minutesToAdd = 0)
+    {
+        $now = new DateTime();
+        return $now->modify("+{$minutesToAdd} minutes");
     }
 }
