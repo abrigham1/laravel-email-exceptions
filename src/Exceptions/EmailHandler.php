@@ -169,7 +169,7 @@ class EmailHandler extends ExceptionHandler
                 )->put(
                     $this->globalThrottleCacheKey,
                     1,
-                    config('laravelEmailExceptions.ErrorEmail.globalThrottleDurationMinutes')
+                    now()->addMinutes(config('laravelEmailExceptions.ErrorEmail.globalThrottleDurationMinutes'))
                 );
 
                 // if we're just making the cache key now we are not global throttling yet
@@ -207,7 +207,7 @@ class EmailHandler extends ExceptionHandler
                 )->put(
                     $this->getThrottleCacheKey($exception),
                     true,
-                    config('laravelEmailExceptions.ErrorEmail.throttleDurationMinutes')
+                    now()->addMinutes(config('laravelEmailExceptions.ErrorEmail.throttleDurationMinutes'))
                 );
 
                 // report that we do not need to throttle as its not been reported within the last throttle period
