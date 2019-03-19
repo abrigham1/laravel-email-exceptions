@@ -291,14 +291,15 @@ class EmailHandler extends ExceptionHandler
     }
 
     /**
-     * get a datetime with the minutes added
+     * get a datetime minutes from now
      *
      * @param int $minutesToAdd
-     * @return mixed
+     * @return \DateTime
+     * @throws Exception
      */
     protected function getDateTimeMinutesFromNow($minutesToAdd = 0)
     {
-        $now = new DateTime();
+        $now = new \DateTime();
         return $now->modify("+{$minutesToAdd} minutes");
     }
 }
