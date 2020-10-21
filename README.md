@@ -1,4 +1,4 @@
-# Laravel 5.x Email Exceptions
+# Laravel 7.x Email Exceptions
 [![Build Status](https://api.travis-ci.org/abrigham1/laravel-email-exceptions.png?branch=master)](https://travis-ci.org/abrigham1/laravel-email-exceptions)
 [![Coverage Status](https://img.shields.io/codecov/c/github/abrigham1/laravel-email-exceptions/master.svg)](https://codecov.io/github/abrigham1/laravel-email-exceptions?branch=master)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.txt)
