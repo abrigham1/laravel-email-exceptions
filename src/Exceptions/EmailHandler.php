@@ -65,10 +65,10 @@ class EmailHandler extends ExceptionHandler
         if (config('laravelEmailExceptions.ErrorEmail.email') != true ||
 
             // if we dont have an email address to mail to
-            !config('laravelEmailExceptions.ErrorEmail.toEmailAddress') ||
+            !config('laravelEmailExceptions.ErrorEmail.toEmailAddress', 'mail.from.address') ||
 
             // if we dont have an email address to mail from
-            !config('laravelEmailExceptions.ErrorEmail.fromEmailAddress') ||
+            !config('laravelEmailExceptions.ErrorEmail.fromEmailAddress', 'mail.from.address') ||
 
             $this->shouldntReport($exception) ||
 
@@ -114,8 +114,8 @@ class EmailHandler extends ExceptionHandler
     {
         $data = [
             'exception' => $exception,
-            'toEmail' => config('laravelEmailExceptions.ErrorEmail.toEmailAddress'),
-            'fromEmail' => config('laravelEmailExceptions.ErrorEmail.fromEmailAddress'),
+            'toEmail' => config('laravelEmailExceptions.ErrorEmail.toEmailAddress', 'mail.from.address'),
+            'fromEmail' => config('laravelEmailExceptions.ErrorEmail.fromEmailAddress', 'mail.from.address'),
         ];
 
         Mail::send('laravelEmailExceptions::emailException', $data, function ($message) {
@@ -124,8 +124,8 @@ class EmailHandler extends ExceptionHandler
                 config('app.name', 'unknown').' ('.config('app.env', 'unknown').')';
             $subject = config('laravelEmailExceptions.ErrorEmail.emailSubject') ?: $default;
 
-            $message->from(config('laravelEmailExceptions.ErrorEmail.fromEmailAddress'))
-                ->to(config('laravelEmailExceptions.ErrorEmail.toEmailAddress'))
+            $message->from(config('laravelEmailExceptions.ErrorEmail.fromEmailAddress', 'mail.from.address'))
+                ->to(config('laravelEmailExceptions.ErrorEmail.toEmailAddress', 'mail.from.address'))
                 ->subject($subject);
         });
     }
