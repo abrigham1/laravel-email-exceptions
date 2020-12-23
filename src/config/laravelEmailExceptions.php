@@ -50,8 +50,8 @@ return [
         'globalThrottle' => true,
         'globalThrottleLimit' => 20,
         'globalThrottleDurationMinutes' => 30,
-        'toEmailAddress' => null,
-        'fromEmailAddress' => null,
+        'toEmailAddress' => env('EMAIL_EXCEPTIONS_TO', null),
+        'fromEmailAddress' => env('EMAIL_EXCEPTIONS_FROM', null),
         'emailSubject' => null
     ]
 ];
