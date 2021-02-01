@@ -12,14 +12,14 @@
             <table border="0" cellpadding="20" cellspacing="0" width="600" id="emailContainer">
                 <tr>
                     <td align="center" valign="top">
-                        <h3 style="height: 40px; line-height: 40px; background-color: #f56857; color: #ffffff;">There has been an exception thrown on {{ env('APP_URL', 'unknown') }}</h3>
+                        <h3 style="height: 40px; line-height: 40px; background-color: #f56857; color: #ffffff;">There has been an exception thrown on {{ config('app.url', 'unknown') }}</h3>
                         <table class="emailExceptionTable" style="text-align: left;" border="0" cellspacing="0" cellpadding="3">
                             <tr>
                                 <td>
                                     <strong>Environment:</strong>
                                 </td>
                                 <td>
-                                    {{ env('APP_ENV', 'unknown') }}
+                                    {{ config('app.env', 'unknown') }}
                                 </td>
                             </tr>
                             <tr>
