@@ -26,10 +26,10 @@ class EmailHandler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param Throwable $exception
+     * @param Exception $exception
      * @throws Exception
      */
-    public function report(Throwable $exception)
+    public function report(Exception $exception)
     {
         // check if we should mail this exception
         if ($this->shouldMail($exception)) {
