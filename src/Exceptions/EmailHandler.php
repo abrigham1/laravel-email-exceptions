@@ -65,10 +65,10 @@ class EmailHandler extends ExceptionHandler
         if (config('laravelEmailExceptions.ErrorEmail.email') != true ||
 
             // if we dont have an email address to mail to
-            !config('laravelEmailExceptions.ErrorEmail.toEmailAddress', 'mail.from.address') ||
+            (!config('laravelEmailExceptions.ErrorEmail.toEmailAddress') && !config('mail.from.address')) ||
 
             // if we dont have an email address to mail from
-            !config('laravelEmailExceptions.ErrorEmail.fromEmailAddress', 'mail.from.address') ||
+            (!config('laravelEmailExceptions.ErrorEmail.fromEmailAddress') && !config('mail.from.address')) ||
 
             $this->shouldntReport($exception) ||
 
