@@ -1,9 +1,9 @@
-# Laravel 7.x Email Exceptions
+# Laravel Email Exceptions
 [![Build Status](https://api.travis-ci.org/abrigham1/laravel-email-exceptions.png?branch=master)](https://travis-ci.org/abrigham1/laravel-email-exceptions)
 [![Coverage Status](https://img.shields.io/codecov/c/github/abrigham1/laravel-email-exceptions/master.svg)](https://codecov.io/github/abrigham1/laravel-email-exceptions?branch=master)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.txt)
 
-The Laravel 5 Email Exceptions package, based on this excellent cakephp package (https://github.com/ebrigham1/cakephp-error-email), is designed to give developers an easy way to email debug information
+The Laravel Email Exceptions package, based on this excellent cakephp package (https://github.com/ebrigham1/cakephp-error-email), is designed to give developers an easy way to email debug information
 to themselves whenever an exception is thrown in their application. Information provided by default is:
 * Environment
 * Exception/Error Url
