@@ -16,7 +16,7 @@ class EmailHandlerTest extends TestCase
      */
     protected $emailHandlerMock;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -124,6 +124,7 @@ class EmailHandlerTest extends TestCase
             'laravelEmailExceptions.ErrorEmail.email' => $email,
             'laravelEmailExceptions.ErrorEmail.toEmailAddress' => $toEmailAddress,
             'laravelEmailExceptions.ErrorEmail.fromEmailAddress' => $fromEmailAddress,
+            'mail.from.address' => $fromEmailAddress,
         ]);
 
         if ($email == true && $toEmailAddress && $fromEmailAddress) {
